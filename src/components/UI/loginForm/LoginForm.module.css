@@ -1,3 +1,16 @@
 .myLoginForm{
-    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    backdrop-filter: blur(100px);
+    height: 400px;
+    width: 300px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+}
+
+.myLoginForm h3{
+    font-size: 30px;
+    color: #abd1b5;
 }
