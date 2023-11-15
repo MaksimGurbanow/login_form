@@ -1,6 +1,11 @@
 .mySubmitButton {
     width: 90%;
-    height: 30px;
+    height: 50px;
     align-self: center;
     margin-top: 50px;
+    font-size: 25px;
+    font-weight: 900;
+    background: #ffc8dd;
+    border: none;
+    border-radius: 20px;
 }
