@@ -1,17 +1,17 @@
 {
-    "admin": {
+   "admin@gmail.com": {
         "isAdmin": true,
-        "email": "admin@gmail.com",
+        "username": "admin",
         "password": "1234"
     },
-    "John Doe": {
+    "johndoe@gmail.com": {
         "isAdmin": false,
-        "email": "johndoe@gmail.com",
+        "username": "JohnDoe",
         "password": "2345"
     },
-    "Anton": {
+    "anton@gmail.com": {
         "isAdmin": false,
-        "email": "anton@gmail.com",
+        "username": "Anton",
         "password": "2345"
     }
 }
