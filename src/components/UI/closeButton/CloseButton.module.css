@@ -1,14 +1,12 @@
 .myBtn {
+    color: white;
     border: none;
     background: transparent;
-    opacity: 0.6;
-    width: min-content;
+    opacity: 0.3;
     cursor: pointer;
     align-self: flex-end;
-    justify-self: flex-start;
-    padding: 0;
-    margin: -20px -20px 0 0;
-    text-align: center;
+    margin: -80px -5px 80px 0;
+    font-size: 25px;
 }
 
 .myBtn:hover{

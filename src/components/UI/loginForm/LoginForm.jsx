@@ -6,6 +6,13 @@ import CloseButton from "../closeButton/CloseButton";
 
 const LoginForm = () => {
   const [open, setOpen] = useState(true);
+  const [user, setUser] = useState({
+    login: "",
+    password: "",
+  });
+  const login = (e) => {
+    e.preventDefault();
+  };
 
   if (open)
     return (
@@ -17,9 +24,21 @@ const LoginForm = () => {
           }}
         />
         <h3 style={{ textAlign: "center" }}>Sign In</h3>
-        <Input name="login" placeholder="Enter login" />
-        <Input name="password" placeholder="Enter password" />
-        <SubmitButton />
+        <Input
+          type="text"
+          name="login"
+          placeholder="Enter login"
+          value={user.login}
+          onChange={(e) => setUser({ ...user, login: e.target.value })}
+        />
+        <Input
+          type="password"
+          name="password"
+          placeholder="Enter password"
+          value={user.password}
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
+        />
+        <SubmitButton login={login} />
       </form>
     );
 };

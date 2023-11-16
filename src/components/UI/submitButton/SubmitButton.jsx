@@ -1,10 +1,15 @@
-import React from 'react'
-import classes from "./submitButton.module.css"
+import React from "react";
+import classes from "./submitButton.module.css";
 
-const SubmitButton = () => {
+const SubmitButton = ({ login }) => {
   return (
-    <button type="submit" className={classes.mySubmitButton}>Log in</button>
-  )
-}
+    <input
+      type="submit"
+      className={classes.mySubmitButton}
+      onClick={(e) => login(e)}
+      value="Log In"
+    />
+  );
+};
 
-export default SubmitButton
+export default SubmitButton;

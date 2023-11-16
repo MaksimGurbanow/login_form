@@ -1,11 +1,12 @@
-import React from "react";
-import classes from "./Input.module.css"
+import React, { useState } from "react";
+import classes from "./Input.module.css";
 
-const Input = ({name, placeholder}) => {
+const Input = (props) => {
   return (
-      <input 
+    <input
       className={classes.myInput}
-      type="text" name={name} placeholder={placeholder} />
+      {...props}
+    />
   );
 };
 
