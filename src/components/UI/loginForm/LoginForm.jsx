@@ -5,9 +5,8 @@ import classes from "./LoginForm.module.css";
 import users from "../../../data/users.json";
 import ErrorMessage from "../../errorMessage/ErrorMessage";
 
-const LoginForm = ({ submit }) => {
+const LoginForm = ({ submit, change, click, Inputs }) => {
   const [loginError, setLoginError] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(true);
   const [user, setUser] = useState({
     login: "",
     password: "",
@@ -25,6 +24,11 @@ const LoginForm = ({ submit }) => {
     }
     return false;
   };
+
+  const handleChange = (name, value) => {
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
+  };
+
 
   const login = (e) => {
     e.preventDefault();
@@ -46,27 +50,23 @@ const LoginForm = ({ submit }) => {
       <form className={classes.myLoginForm}>
         {loginError && <ErrorMessage />}
         <h3 style={{ textAlign: "center" }}>Sign In</h3>
-        <Input
-          type="text"
-          name="login"
-          placeholder="Enter login"
-          value={user.login}
-          onChange={(e) => setUser({ ...user, login: e.target.value })}
-        />
-        <Input
-          type="password"
-          name="password"
-          placeholder="Enter password"
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-        />
+        {Inputs.map((input) => (
+          <Input
+            key={input.name}
+            type={input.type}
+            name={input.name}
+            value={user[input.name]}
+            placeholder={input.placeholder}
+            onChange={(value) => handleChange(input.name, value)}
+          />
+        ))}
         <p>
           Don't have an account?{" "}
           <button
             type="button"
             onClick={(e) => {
               e.preventDefault();
-              setIsRegistered(false);
+              click();
             }}
           >
             Create one!
