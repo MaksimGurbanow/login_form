@@ -5,7 +5,7 @@ import SubmitButton from "../submitButton/SubmitButton";
 import classes from "./LoginForm.module.css";
 import users from "../../../data/users.json";
 
-const LoginForm = ({ submit, click, Inputs }) => {
+const LoginForm = ({ submit, click, Inputs, hint1, hint2 }) => {
   const [user, setUser] = useState({
     login: "",
     password: "",
@@ -49,7 +49,7 @@ const LoginForm = ({ submit, click, Inputs }) => {
           />
         ))}
         <p>
-          Don't have an account?{" "}
+          {hint1}{" "}
           <button
             type="button"
             onClick={(e) => {
@@ -57,7 +57,7 @@ const LoginForm = ({ submit, click, Inputs }) => {
               click();
             }}
           >
-            Create one!
+            {hint2}
           </button>
         </p>
         <SubmitButton submit={e => handleMethod(e)} value="Log In" />

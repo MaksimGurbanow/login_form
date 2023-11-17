@@ -64,6 +64,8 @@ function App() {
                 submit={login}
                 click={handleClick}
                 Inputs={Inputs.slice(1)}
+                hint1={"Don't have an account? "}
+                hint2={"Register!"}
               />
             </>
             :
@@ -73,6 +75,8 @@ function App() {
               submit={signUp}
               click={handleClick}
               Inputs={Inputs}
+              hint1={"Already registered? "}
+              hint2={"Log In!"}
             />
             </>
       }
