@@ -14,3 +14,18 @@
     font-size: 30px;
     color: #abd1b5;
 }
+.myLoginForm p {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.myLoginForm button {
+    border: none;
+    background: transparent;
+    text-decoration: none;
+    color: #abd1b5;
+}
+
+.myLoginForm button:hover{
+    color: rgb(255, 87, 219);
+}

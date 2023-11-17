@@ -2,27 +2,49 @@ import React, { useState } from "react";
 import Input from "../input/Input";
 import SubmitButton from "../submitButton/SubmitButton";
 import classes from "./LoginForm.module.css";
-import CloseButton from "../closeButton/CloseButton";
+import users from "../../../data/users.json";
+import ErrorMessage from "../../errorMessage/ErrorMessage";
 
-const LoginForm = () => {
-  const [open, setOpen] = useState(true);
+const LoginForm = ({ submit }) => {
+  const [loginError, setLoginError] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(true);
   const [user, setUser] = useState({
     login: "",
     password: "",
+    username: "",
   });
-  const login = (e) => {
-    e.preventDefault();
+
+  const userExists = () => {
+    for (const userItem in users) {
+      if (
+        userItem === user.login &&
+        users[userItem].password === user.password
+      ) {
+        return true;
+      }
+    }
+    return false;
   };
 
-  if (open)
-    return (
+  const login = (e) => {
+    e.preventDefault();
+    if (userExists()) {
+      submit(users[user.login]);
+    }
+    setLoginError(true);
+  };
+
+  const signUp = (e) => {
+    e.preventDefault();
+    if (!userExists()) {
+      users[user.login] = { ...user };
+    }
+  };
+
+  return (
+    <>
       <form className={classes.myLoginForm}>
-        <CloseButton
-          callback={(e) => {
-            e.preventDefault();
-            setOpen(false);
-          }}
-        />
+        {loginError && <ErrorMessage />}
         <h3 style={{ textAlign: "center" }}>Sign In</h3>
         <Input
           type="text"
@@ -38,9 +60,22 @@ const LoginForm = () => {
           value={user.password}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
-        <SubmitButton login={login} />
+        <p>
+          Don't have an account?{" "}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsRegistered(false);
+            }}
+          >
+            Create one!
+          </button>
+        </p>
+        <SubmitButton login={login} value="Log In" />
       </form>
-    );
+    </>
+  );
 };
 
 export default LoginForm;

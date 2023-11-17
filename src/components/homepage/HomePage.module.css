@@ -1,0 +1,36 @@
+.homepage {
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation ul{
+    height: 50px;
+    top: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.navigation li {
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+    font-family: serif;
+    font-weight: 900;
+    width: 33.3vw;
+    height: 100%;
+    padding: 15px 0 0 0;
+}
+
+.navigation li:hover {
+    background: #00ffa4;
+}
+
+.greeting {
+    margin: 20px;
+}
