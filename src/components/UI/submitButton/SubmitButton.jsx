@@ -1,12 +1,15 @@
 import React from "react";
 import classes from "./submitButton.module.css";
 
-const SubmitButton = ({ login, value }) => {
+const SubmitButton = ({ submit, value }) => {
   return (
     <input
       type="submit"
       className={classes.mySubmitButton}
-      onClick={(e) => login(e)}
+      onClick={(e) => {
+        e.preventDefault()
+        submit(e)
+      }}
       value={value}
     />
   );

@@ -1,17 +1,26 @@
+// LoginForm.js
 import React, { useState } from "react";
 import Input from "../input/Input";
 import SubmitButton from "../submitButton/SubmitButton";
 import classes from "./LoginForm.module.css";
 import users from "../../../data/users.json";
-import ErrorMessage from "../../errorMessage/ErrorMessage";
 
-const LoginForm = ({ submit, change, click, Inputs }) => {
-  const [loginError, setLoginError] = useState(false);
+const LoginForm = ({ submit, click, Inputs }) => {
   const [user, setUser] = useState({
     login: "",
     password: "",
     username: "",
   });
+
+  const handleChange = (name, value) => {
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
+  };
+
+  const handleMethod = (e) => {
+    e.preventDefault();
+    const user_exists = userExists()
+    submit(user, user_exists);
+  };
 
   const userExists = () => {
     for (const userItem in users) {
@@ -25,30 +34,9 @@ const LoginForm = ({ submit, change, click, Inputs }) => {
     return false;
   };
 
-  const handleChange = (name, value) => {
-    setUser((prevUser) => ({ ...prevUser, [name]: value }));
-  };
-
-
-  const login = (e) => {
-    e.preventDefault();
-    if (userExists()) {
-      submit(users[user.login]);
-    }
-    setLoginError(true);
-  };
-
-  const signUp = (e) => {
-    e.preventDefault();
-    if (!userExists()) {
-      users[user.login] = { ...user };
-    }
-  };
-
   return (
     <>
       <form className={classes.myLoginForm}>
-        {loginError && <ErrorMessage />}
         <h3 style={{ textAlign: "center" }}>Sign In</h3>
         {Inputs.map((input) => (
           <Input
@@ -72,7 +60,7 @@ const LoginForm = ({ submit, change, click, Inputs }) => {
             Create one!
           </button>
         </p>
-        <SubmitButton login={login} value="Log In" />
+        <SubmitButton submit={e => handleMethod(e)} value="Log In" />
       </form>
     </>
   );

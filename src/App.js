@@ -2,33 +2,53 @@ import { useState } from 'react';
 import './App.css';
 import LoginForm from './components/UI/loginForm/LoginForm';
 import HomePage from './components/homepage/HomePage';
+import users from "./data/users.json"
+import ErrorMessage from './components/errorMessage/ErrorMessage';
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [hasAccount, setHasAccount] = useState(true)
+  const [errorDetected, setErrorDetected] = useState(false)
   const [user, setUser] = useState({
     login: "",
     password: "",
     username: ""
   });
 
+  const errorMessages = {
+    login: "Incorrect login or password",
+    register: "User already exists"
+  }
+
   const Inputs = [
-    {type: "text", name: "login", value: "", placeholder:"Enter login"},
-    {type: "password", name: "password", value: "", placeholder:"Enter password"},
-    {type: "text", name: "username", value: "", placeholder:"Enter username"}
+    { type: "text", name: "username", value: "", placeholder: "Enter username" },
+    { type: "text", name: "login", value: "", placeholder: "Enter login" },
+    { type: "password", name: "password", value: "", placeholder: "Enter password" },
   ]
 
-  const handleChange = (value) => {
-    setUser(value)
-  }
+  const login = (userData, userExists) => {
+    if (userExists) {
+      setUser(users[userData.login])
+      setIsAuth(true)
+      return
+    }
+    setErrorDetected(true)
+  };
 
-  const handleSubmit = (userData) => {
-    setUser(userData)
-    setIsAuth(true)
-  }
+  const signUp = (userData, userExists) => {
+    if (!userExists) {
+      setUser(userData);
+      users[userData.login] = { ...userData };
+      setIsAuth(true)
+      return
+    }
+    setErrorDetected(true)
+  };
 
   const handleClick = () => {
-    setHasAccount(!hasAccount)
+    setErrorDetected(false);
+    setUser({});
+    setHasAccount(!hasAccount);
   }
 
   return (
@@ -38,18 +58,23 @@ function App() {
           <HomePage user={user} />
           :
           hasAccount ?
+            <>
+              {errorDetected && <ErrorMessage children={errorMessages.login} />}
+              <LoginForm
+                submit={login}
+                click={handleClick}
+                Inputs={Inputs.slice(1)}
+              />
+            </>
+            :
+            <>
+              {errorDetected && <ErrorMessage children={errorMessages.register} />}
             <LoginForm
-              submit={handleSubmit}
-              change={handleChange}
+              submit={signUp}
               click={handleClick}
               Inputs={Inputs}
             />
-            :
-            <LoginForm
-              submit={handleSubmit}
-              change={handleChange}
-              click={handleClick}
-            />
+            </>
       }
     </div>
   )
